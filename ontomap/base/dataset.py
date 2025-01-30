@@ -20,6 +20,8 @@ class OMDataset(ABC):
 
     def collect(self, root_dir: str) -> Dict:
         om_root_path = os.path.join(root_dir, self.track, self.ontology_name)
+        print(om_root_path)
+
         data = {
             "dataset-info": {"track": self.track, "ontology-name": self.ontology_name},
             "source": self.source_ontology.parse(

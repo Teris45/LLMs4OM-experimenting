@@ -20,8 +20,19 @@ class HumanOntology(BaseOntologyParser):
 class MouseHumanOMDataset(OMDataset):
     track = track
     ontology_name = "mouse-human"
+    print("123")
 
     source_ontology = MouseOntology()
     target_ontology = HumanOntology()
+
+    working_dir = os.path.join(track, ontology_name)
+
+
+class assays(OMDataset):
+    track = track
+    ontology_name = "assays"
+
+    source_ontology = MouseOntology()
+    target_ontology = MouseOntology()
 
     working_dir = os.path.join(track, ontology_name)

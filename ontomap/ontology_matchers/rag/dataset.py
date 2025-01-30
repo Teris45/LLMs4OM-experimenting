@@ -29,6 +29,7 @@ class RAGDataset(Dataset):
         pass
 
     def collate_fn(self, batchs):
+        # print(type(batchs))
         batchs_clear = {"texts": [], "iris": []}
         for batch in batchs:
             batchs_clear["texts"].append(batch["texts"])
