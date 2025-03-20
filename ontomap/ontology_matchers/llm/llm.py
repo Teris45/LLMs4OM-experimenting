@@ -8,6 +8,7 @@ import torch
 from openai import OpenAI
 
 from ontomap.base import BaseOMModel
+from transformers import BitsAndBytesConfig
 
 
 class LLM(BaseOMModel):
@@ -41,7 +42,9 @@ class LLM(BaseOMModel):
             max_length=self.kwargs["tokenizer_max_length"],
             padding=self.kwargs["padding"],
         )
-        inputs.to(self.kwargs["device"])
+        
+        # inputs.to(self.kwargs["device"])
+        inputs.to('cpu')
         return inputs
 
     def generate(self, input_data: List) -> List:
@@ -188,7 +191,7 @@ class LLaMA2DecoderLLMArch(BaseLLMArch):
 
     def load_tokenizer(self) -> None:
         def padding_side_left_llms(path):
-            llms = ["llama", "falcon", "vicuna", "mpt", 'Mamba']
+            llms = ["llama", "falcon", "vicuna", "mpt", 'Mamba', 'Qwen']
             for llm in llms:
                 if llm in path:
                     return True
@@ -202,17 +205,23 @@ class LLaMA2DecoderLLMArch(BaseLLMArch):
             )
         else:
             self.tokenizer = self.tokenizer.from_pretrained(self.path, token=os.environ["HUGGINGFACE_ACCESS_TOKEN"])
-        if "falcon" not in self.path:
+            
+        # if "Qwen" in self.path:
+            # self.tokenizer.add_special_tokens({'pad_token': '[PAD]'})
+            # self.tokenizer.eos_token = "<|endoftext|>"
+        if "falcon" not in self.path and 'Qwen' not in self.path:
+            print(f"MPIKAA? {self.path}")
             self.tokenizer.eos_token = "<\s>"
         self.tokenizer.pad_token = self.tokenizer.eos_token
-        # self.tokenizer.add_special_tokens({'pad_token': '[PAD]'})
 
     def load_model(self) -> None:
+        
         if self.kwargs["device"] != "cpu":
             self.model = self.model.from_pretrained(
                 self.path,
-                load_in_8bit=True,
-                device_map="balanced",
+                offload_buffers=True,
+                quantization_config=BitsAndBytesConfig(load_in_8bit=True,  llm_int8_enable_fp32_cpu_offload=True,),
+                device_map="auto",
                 token=os.environ["HUGGINGFACE_ACCESS_TOKEN"],
             )
         else:

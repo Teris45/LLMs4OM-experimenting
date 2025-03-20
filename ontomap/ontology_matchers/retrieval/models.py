@@ -16,6 +16,13 @@ from ontomap.ontology_matchers.retrieval.retrieval import (
 )
 from ontomap.utils import io
 
+class BGE_M3Retrieval(BiEncoderRetrieval):
+    path: str = "BAAI/bge-m3"
+
+    def __str__(self):
+        return super().__str__() + "+bge-m3Retrieval"
+
+
 
 class BERTRetrieval(BiEncoderRetrieval):
     path: str = "sentence-transformers/multi-qa-mpnet-base-dot-v1"
@@ -86,6 +93,8 @@ class BM25Retrieval(Retrieval):
 
     def __str__(self):
         return super().__str__() + "+BM25Retrieval"
+
+
 
 
 class SVMBERTRetrieval(MLRetrieval):

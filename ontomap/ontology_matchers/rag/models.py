@@ -13,7 +13,7 @@ from ontomap.ontology_matchers.rag.rag import (
     RAGBasedDecoderLLMArch,
     RAGBasedOpenAILLMArch,
 )
-from ontomap.ontology_matchers.retrieval.models import AdaRetrieval, BERTRetrieval
+from ontomap.ontology_matchers.retrieval.models import AdaRetrieval, BERTRetrieval, BGE_M3Retrieval
 
 from typing import Any
 import torch
@@ -35,6 +35,14 @@ class Mistral7BDecoderLM(RAGBasedDecoderLLMArch):
 
     def __str__(self):
         return super().__str__() + "-MistralLM-7B-v0.1"
+
+class Qwen2_5LLM(RAGBasedDecoderLLMArch):
+    tokenizer = AutoTokenizer
+    model = AutoModelForCausalLM
+    path = "Qwen/Qwen2.5-1.5B-Instruct"
+    def __str__(self):
+        return super().__str__() + "-qwen2.5-1.5b-instruct"
+
 
 
 class Falcon7BDecoderLM(RAGBasedDecoderLLMArch):
@@ -239,3 +247,11 @@ class MambaLLMBertRAG(RAG):
 
     def __str__(self):
         return super().__str__() + "-MambaLLMBertRAG"
+
+
+class Qwen2_5BGE_M3RAG(RAG):
+    Retrieval = BGE_M3Retrieval
+    LLM = Qwen2_5LLM
+
+    def _str__(self):
+        return super().__str__() + "-Qwen2_5BGE_M3RAG"
