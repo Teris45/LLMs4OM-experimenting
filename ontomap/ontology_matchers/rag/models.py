@@ -39,9 +39,9 @@ class Mistral7BDecoderLM(RAGBasedDecoderLLMArch):
 class Qwen2_5LLM(RAGBasedDecoderLLMArch):
     tokenizer = AutoTokenizer
     model = AutoModelForCausalLM
-    path = "Qwen/Qwen2.5-1.5B-Instruct"
+    path = "Qwen/Qwen2.5-3B-Instruct"
     def __str__(self):
-        return super().__str__() + "-qwen2.5-1.5b-instruct"
+        return super().__str__() + "-qwen2.5-3b-instruct"
 
 
 

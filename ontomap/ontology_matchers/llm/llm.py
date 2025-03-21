@@ -43,8 +43,8 @@ class LLM(BaseOMModel):
             padding=self.kwargs["padding"],
         )
         
-        # inputs.to(self.kwargs["device"])
-        inputs.to('cpu')
+        inputs.to(self.kwargs["device"])
+        # inputs.to('cpu')
         return inputs
 
     def generate(self, input_data: List) -> List:
