@@ -13,7 +13,7 @@ from ontomap.ontology_matchers.rag.rag import (
     RAGBasedDecoderLLMArch,
     RAGBasedOpenAILLMArch,
 )
-from ontomap.ontology_matchers.retrieval.models import AdaRetrieval, BERTRetrieval, BGE_M3Retrieval
+from ontomap.ontology_matchers.retrieval.models import AdaRetrieval, BERTRetrieval, BGE_M3Retrieval, USER_bge_m3Retrieval
 
 from typing import Any
 import torch
@@ -42,6 +42,14 @@ class Qwen2_5LLM(RAGBasedDecoderLLMArch):
     path = "Qwen/Qwen2.5-3B-Instruct"
     def __str__(self):
         return super().__str__() + "-qwen2.5-3b-instruct"
+
+class Phi4_mini(RAGBasedDecoderLLMArch):
+    tokenizer = AutoTokenizer
+    model = AutoModelForCausalLM
+    path = "microsoft/Phi-4-mini-instruct"
+    def __str__(self):
+        return super().__str__() + "-Phi-4-mini-instruct"
+
 
 
 
@@ -255,3 +263,27 @@ class Qwen2_5BGE_M3RAG(RAG):
 
     def _str__(self):
         return super().__str__() + "-Qwen2_5BGE_M3RAG"
+    
+
+class Qwen2_5_USER_BGE_M3RAG(RAG):
+    Retrieval = USER_bge_m3Retrieval
+    LLM = Qwen2_5LLM
+
+    def _str__(self):
+        return super().__str__() + "-Qwen2_5_USER_BGE_M3RAG"
+    
+class Phi4_mini_bge_m3RAG(RAG):
+    Retrieval = BGE_M3Retrieval
+    LLM = Phi4_mini
+
+    def _str__(self):
+        return super().__str__() + "-Phi4_BGE_M3RAG"
+
+
+class Phi4_mini_USER_bge_m3RAG(RAG):
+    Retrieval = USER_bge_m3Retrieval
+    LLM = Phi4_mini
+
+    def _str__(self):
+        return super().__str__() + "-Phi4_USER_BGE_M3RAG"
+    

@@ -23,6 +23,14 @@ class BGE_M3Retrieval(BiEncoderRetrieval):
         return super().__str__() + "+bge-m3Retrieval"
 
 
+class USER_bge_m3Retrieval(BiEncoderRetrieval):
+    path: str = "deepvk/USER-bge-m3"
+
+    def __str__(self):
+        return super().__str__() + "+USER-bge-m3Retrieval"
+
+
+
 
 class BERTRetrieval(BiEncoderRetrieval):
     path: str = "sentence-transformers/multi-qa-mpnet-base-dot-v1"

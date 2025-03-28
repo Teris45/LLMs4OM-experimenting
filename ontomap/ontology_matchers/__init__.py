@@ -38,7 +38,10 @@ from ontomap.ontology_matchers.rag.models import (
     VicunaLLMBertRAG,
     MambaLLMAdaRAG,
     MambaLLMBertRAG,
-    Qwen2_5BGE_M3RAG
+    Qwen2_5BGE_M3RAG,
+    Qwen2_5_USER_BGE_M3RAG,
+    Phi4_mini_bge_m3RAG,
+    Phi4_mini_USER_bge_m3RAG
 )
 from ontomap.ontology_matchers.retrieval.models import (
     AdaRetrieval,

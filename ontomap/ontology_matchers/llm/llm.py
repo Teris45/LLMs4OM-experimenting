@@ -191,7 +191,7 @@ class LLaMA2DecoderLLMArch(BaseLLMArch):
 
     def load_tokenizer(self) -> None:
         def padding_side_left_llms(path):
-            llms = ["llama", "falcon", "vicuna", "mpt", 'Mamba', 'Qwen']
+            llms = ["llama", "falcon", "vicuna", "mpt", 'Mamba', 'Qwen', 'Phi']
             for llm in llms:
                 if llm in path:
                     return True

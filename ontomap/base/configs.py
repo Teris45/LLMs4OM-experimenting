@@ -95,7 +95,8 @@ class BaseConfig:
         # Retrieval Configurations
         retriever_config = self.retrieval()
         retriever_models = ["BM25Retrieval", "TFIDFRetrieval", "BERTRetrieval", "SpecterBERTRetrieval",
-                            "FlanT5XLRetrieval", "FlanT5XXLRetrieval", "SVMBERTRetrieval", "AdaRetrieval", "BGE_M3Retrieval"]
+                            "FlanT5XLRetrieval", "FlanT5XXLRetrieval", "SVMBERTRetrieval", "AdaRetrieval", "BGE_M3Retrieval",
+                            "USER_bge_m3Retrieval"]
         
         for retriever_model in retriever_models:
             self.parser.add_argument("--" + retriever_model, type=dict, default=retriever_config)
@@ -108,7 +109,8 @@ class BaseConfig:
                           "LLaMA7BBertICV", "FalconBertICV", "VicunaBertICV", "MPTBertICV",
                           "LLaMA7BAdaFewShot", "MistralAdaFewShot", "FalconAdaFewShot", "VicunaAdaFewShot", "MPTAdaFewShot",
                           "LLaMA7BBertFewShot", "MistralBertFewShot", "FalconBertFewShot", "VicunaBertFewShot", "MPTBertFewShot",
-                          "MambaLLMAdaFewShot", "MambaLLMBertFewShot", "MambaLLMAdaRAG", "MambaLLMBertRAG", "Qwen2_5BGE_M3RAG"]
+                          "MambaLLMAdaFewShot", "MambaLLMBertFewShot", "MambaLLMAdaRAG", "MambaLLMBertRAG", "Qwen2_5BGE_M3RAG",
+                          "Qwen2_5_USER_BGE_M3RAG","Phi4_mini_bge_m3RAG","Phi4_mini_USER_bge_m3RAG"]
 
         for rag_icv_model in rag_icv_models:
             self.parser.add_argument("--" + rag_icv_model, type=dict, default=llama_rag_config)
